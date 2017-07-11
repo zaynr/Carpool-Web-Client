@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="CarpoolWebClient:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Carpool-Web-Client.war">
+      <element id="artifact" artifact-name="CarpoolWebClient:war exploded" />
+    </root>
+  </artifact>
+</component>
