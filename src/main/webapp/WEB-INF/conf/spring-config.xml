@@ -13,4 +13,6 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!--database username:remote password:*F7334D7402840187BE6DFBC814C35D4097A34BD2-->
+
 </beans>
