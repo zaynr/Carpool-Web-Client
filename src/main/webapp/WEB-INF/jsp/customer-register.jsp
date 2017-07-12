@@ -12,12 +12,12 @@
 <head>
     <script type="text/javascript" src="../../js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="../../js/jQuery-MD5.js"></script>
-    <script type="text/javascript" src="../../js/register.js"></script>
-    <title>注册</title>
+    <script type="text/javascript" src="../../js/customer-register.js"></script>
+    <title>乘客注册</title>
 </head>
 <body>
     <div id="test">${test}</div>
-    <br>用户昵称：<br>
+    <br>姓名：<br>
     <input id="name" type="text"/>
     <br>工号：<br>
     <input id="serial_number" type="number"/>

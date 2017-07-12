@@ -1,5 +1,5 @@
 /**
- * Created by zaynr on 2017/7/11.
+ * Created by zengzy19585 on 2017/7/12.
  */
 $(document).ready(function () {
     $("#submit").click(function () {
@@ -8,12 +8,12 @@ $(document).ready(function () {
         map["password"] = encrypt;
         map["name"] = $("#name").val();
         map["mobile_number"] = $("#mobile_number").val();
-        map["serial_number"] = $("#serial_number").val();
+        map["car_plate"] = $("#car_plate").val();
         var param = {userInfo:map};
 
         $.ajax({
             type: "POST",
-            url: "/test/post-data.do",
+            url: "/driver/post-register-data.do",
             data: param,
             success: function (data) {
                 $("#test").text(data);

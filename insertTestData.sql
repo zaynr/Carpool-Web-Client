@@ -1,10 +1,10 @@
 USE users;
 
-INSERT INTO Customers(name, serial_num, sex, mobile_number,pwd) VALUES(
+INSERT INTO Customers(user_name, serial_num, sex, mobile_number,pwd) VALUES(
     "zengzengyu","19585","男","15658027823","123456"
 );
 
-INSERT INTO Drivers(name,mobile_number,pwd,car_plate) VALUES (
+INSERT INTO Drivers(driver_name,mobile_number,pwd,car_plate) VALUES (
     "driver-1","15656097278","123445","闽E-12345"
 );
 

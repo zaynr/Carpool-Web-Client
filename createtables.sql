@@ -18,6 +18,8 @@ CREATE TABLE Drivers(
     mobile_number varchar(11),                                          #手机号
     pwd varchar(255),                                                   #密码
     car_plate varchar(15),                                              #车牌号
+    lat DOUBLE,                                                         #司机当前纬度
+    lng DOUBLE                                                          #司机当前经度
     primary key (mobile_number)
 );
 CREATE TABLE Friends(
