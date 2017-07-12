@@ -36,6 +36,24 @@
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
     </dependency>
+
+    <!--database username:'remote' password:'remote-connect' url:'23.83.250.227'-->
+
+    <!-- JPA Data (We are going to use Repositories, Entities, Hibernate, etc...) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-dbcp2</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <!-- Use MySQL Connector-J -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
