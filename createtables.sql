@@ -20,6 +20,8 @@ CREATE TABLE Drivers(
     car_plate varchar(15),                                              #车牌号
     lat DOUBLE,                                                         #司机当前纬度
     lng DOUBLE,                                                         #司机当前经度
+    fin_deals int,                                                      #已完成订单数
+    rating FLOAT,                                                       #信用星级
     primary key (mobile_number)
 );
 CREATE TABLE Friends(
@@ -37,5 +39,7 @@ CREATE TABLE Orders(
     ori_lng	float,                                                      #起点经度
     des_lat	float,                                                      #终点纬度
     des_lng	float,                                                      #终点经度
+    accessment VARCHAR(255),                                            #评价
+    rating INT,                                                         #星级
     status tinyint                                                      #是否完成，（0：未完成，1：已完成）
 );
