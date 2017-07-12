@@ -9,17 +9,17 @@ CREATE TABLE Customers(
     user_name varchar(20),          
     serial_num int,                                                     #工号
     sex varchar(5),                                                     #性别
-    mobile_number varchar(11),                                          #手机号
+    mobile_number varchar(15),                                          #手机号
     pwd varchar(255),                                                   #密码
     primary key (serial_num)
 );
 CREATE TABLE Drivers(
     driver_name varchar(255),
-    mobile_number varchar(11),                                          #手机号
+    mobile_number varchar(15),                                          #手机号
     pwd varchar(255),                                                   #密码
     car_plate varchar(15),                                              #车牌号
     lat DOUBLE,                                                         #司机当前纬度
-    lng DOUBLE                                                          #司机当前经度
+    lng DOUBLE,                                                         #司机当前经度
     primary key (mobile_number)
 );
 CREATE TABLE Friends(
