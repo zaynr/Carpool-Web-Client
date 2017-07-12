@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -44,5 +45,21 @@ public class DriverController {
             repository.save(driver);
         }
         return status;
+    }
+
+    @RequestMapping("/getting-driver-loc.do")
+    @ResponseBody
+    public Map<String, String> getLoc(@RequestParam(name = "mobile_number")
+                                                  String mobile_number){
+        Map<String, String> loc = new HashMap<String, String>();
+        Drivers driver = repository.findByMobile_number(mobile_number);
+        String lat,lng;
+        if(driver!=null){
+            lat = driver.getLat();
+            lng = driver.getLng();
+            lat = lat + ";" + lng;
+            loc.put("location", lat);
+        }
+        return loc;
     }
 }
