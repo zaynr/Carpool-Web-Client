@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,11 +53,11 @@ public class DriverController {
     public Map<String, String> getLoc(@RequestParam(name = "mobile_number")
                                                   String mobile_number){
         Map<String, String> loc = new HashMap<String, String>();
-        Drivers driver = repository.findByMobile_number(mobile_number);
+        List<String> res = repository.findByMobile_number(mobile_number);
         String lat,lng;
-        if(driver!=null){
-            lat = driver.getLat();
-            lng = driver.getLng();
+        if(res!=null){
+            lat = res.get(0);
+            lng = res.get(1);
             lat = lat + ";" + lng;
             loc.put("location", lat);
         }
