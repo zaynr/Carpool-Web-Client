@@ -48,7 +48,7 @@ public class DriverController {
         if(status.equals("success!")){
             Drivers driver = new Drivers();
             driver.setMobile_number(userInfo.get("userInfo[mobile_number]"));
-            driver.setCar_plate(userInfo.get("userInfo[mobile_number]"));
+            driver.setCar_plate(userInfo.get("userInfo[car_plate]"));
             driver.setDriver_name(userInfo.get("userInfo[name]"));
             driver.setPwd(userInfo.get("userInfo[password]"));
             repository.save(driver);

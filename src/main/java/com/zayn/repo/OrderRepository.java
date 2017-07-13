@@ -24,4 +24,7 @@ public interface OrderRepository extends CrudRepository<Orders, Long>{
 
     @Query(value = "SELECT * FROM Orders WHERE call_serial = :call_serial", nativeQuery = true)
     List<Orders> findByCall_serial(@Param("call_serial")String call_serial);
+
+    @Query(value = "SELECT * FROM Orders WHERE status = 0", nativeQuery = true)
+    List<Orders> findAllUndone();
 }

@@ -21,45 +21,53 @@ public class OrdersController {
 
     @RequestMapping("/get-by-serial.do")
     @ResponseBody
-    public Map<String, String> getBySerial(@RequestParam("serial_num")String serial_num){
-        Map<String, String> res = new HashMap<String, String>();
+    public ArrayList<HashMap<String, String>> getBySerial(@RequestParam("serial_num")String serial_num){
+        ArrayList<HashMap<String, String>> res = new ArrayList<HashMap<String, String>>();
         Orders order = repository.findBySerial_num(serial_num);
-        res.put("ori_lat", order.getOri_lat());
-        res.put("ori_lng", order.getOri_lng());
-        res.put("des_lat", order.getDes_lat());
-        res.put("des_lng", order.getDes_lng());
-        res.put("apt_time", order.getApt_time().toString());
+        res = packResultSet(order, res);
         return res;
     }
 
     @RequestMapping("/get-by-rec.do")
     @ResponseBody
-    public Map<String, ArrayList<String>> getByRec(@RequestParam("rec_mobile_num")String rec_mobile_num){
-        Map<String, ArrayList<String>> res = new HashMap<String, ArrayList<String>>();
+    public ArrayList<HashMap<String, String>> getByRec(@RequestParam("rec_mobile_num")String rec_mobile_num){
+        ArrayList<HashMap<String, String>> res = new ArrayList<HashMap<String, String>>();
         for(Orders order : repository.findByRec_mobile_num(rec_mobile_num)){
-            ArrayList<String> detail = new ArrayList<String>();
-            detail.add(order.getOri_lat());
-            detail.add(order.getOri_lng());
-            detail.add(order.getDes_lat());
-            detail.add(order.getDes_lng());
-            detail.add(order.getApt_time().toString());
-            res.put(order.getRec_mobile_num(), detail);
+            res = packResultSet(order, res);
         }
+        return res;
+    }
+
+    @RequestMapping("/get-all-undone-order.do")
+    @ResponseBody
+    public ArrayList<HashMap<String, String>> getAllUndone(){
+        ArrayList<HashMap<String, String>> res = new ArrayList<HashMap<String, String>>();
+        for(Orders order : repository.findAllUndone()){
+            res = packResultSet(order, res);
+        }
+        return res;
+    }
+
+    private ArrayList<HashMap<String, String>> packResultSet(Orders order, ArrayList<HashMap<String, String>> res){
+        HashMap<String, String> detail = new HashMap<String, String>();
+        detail.put("call_serial", order.getCall_serial());
+        detail.put("rec_mobile_num", order.getRec_mobile_num());
+        detail.put("ori_lat", order.getOri_lat());
+        detail.put("ori_lng", order.getOri_lng());
+        detail.put("des_lat", order.getDes_lat());
+        detail.put("des_lng", order.getDes_lng());
+        detail.put("apt_time", order.getApt_time().toString());
+        detail.put("serial_num", String.valueOf(order.getSerial_num()));
+        res.add(detail);
         return res;
     }
 
     @RequestMapping("/get-by-call.do")
     @ResponseBody
-    public Map<String, ArrayList<String>> getByCall(@RequestParam("call_serial")String call_serial){
-        Map<String, ArrayList<String>> res = new HashMap<String, ArrayList<String>>();
+    public ArrayList<HashMap<String, String>> getByCall(@RequestParam("call_serial")String call_serial){
+        ArrayList<HashMap<String, String>> res = new ArrayList<HashMap<String, String>>();
         for(Orders order : repository.findByRec_mobile_num(call_serial)){
-            ArrayList<String> detail = new ArrayList<String>();
-            detail.add(order.getOri_lat());
-            detail.add(order.getOri_lng());
-            detail.add(order.getDes_lat());
-            detail.add(order.getDes_lng());
-            detail.add(order.getApt_time().toString());
-            res.put(order.getCall_serial(), detail);
+            res = packResultSet(order, res);
         }
         return res;
     }
