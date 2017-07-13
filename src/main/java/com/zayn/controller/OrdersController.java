@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by zengzy19585 on 2017/7/13.
@@ -31,7 +28,7 @@ public class OrdersController {
         res.put("ori_lng", order.getOri_lng());
         res.put("des_lat", order.getDes_lat());
         res.put("des_lng", order.getDes_lng());
-        res.put("apt_time", order.getApt_time());
+        res.put("apt_time", order.getApt_time().toString());
         return res;
     }
 
@@ -45,7 +42,7 @@ public class OrdersController {
             detail.add(order.getOri_lng());
             detail.add(order.getDes_lat());
             detail.add(order.getDes_lng());
-            detail.add(order.getApt_time());
+            detail.add(order.getApt_time().toString());
             res.put(order.getRec_mobile_num(), detail);
         }
         return res;
@@ -61,7 +58,7 @@ public class OrdersController {
             detail.add(order.getOri_lng());
             detail.add(order.getDes_lat());
             detail.add(order.getDes_lng());
-            detail.add(order.getApt_time());
+            detail.add(order.getApt_time().toString());
             res.put(order.getCall_serial(), detail);
         }
         return res;
@@ -72,7 +69,8 @@ public class OrdersController {
     private String placeOrder(@RequestParam() Map<String, String> orderInfo){
         String status = "success!";
         Orders order = new Orders();
-        order.setApt_time(orderInfo.get("apt_time"));
+        Long time = Long.parseLong(orderInfo.get("apt_time"));
+        order.setApt_time(new Date(time));
         order.setOri_lat(orderInfo.get("ori_lat"));
         order.setOri_lng(orderInfo.get("ori_lng"));
         order.setDes_lat(orderInfo.get("des_lat"));

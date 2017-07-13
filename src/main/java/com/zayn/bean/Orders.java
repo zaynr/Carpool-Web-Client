@@ -1,9 +1,7 @@
 package com.zayn.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by zengzy19585 on 2017/7/13.
@@ -14,8 +12,11 @@ public class Orders {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int serial_num;
 
-    private String call_serial,rec_mobile_num,call_type,apt_time,ori_lat,
+    private String call_serial,rec_mobile_num,call_type,ori_lat,
         ori_lng,des_lat,des_lng,status;
+
+    @Column(name="apt_time")
+    private Date apt_time;
 
     public int getSerial_num() {
         return serial_num;
@@ -49,11 +50,11 @@ public class Orders {
         this.call_type = call_type;
     }
 
-    public String getApt_time() {
+    public Date getApt_time() {
         return apt_time;
     }
 
-    public void setApt_time(String apt_time) {
+    public void setApt_time(Date apt_time) {
         this.apt_time = apt_time;
     }
 
