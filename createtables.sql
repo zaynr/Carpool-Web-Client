@@ -18,6 +18,7 @@ CREATE TABLE Drivers(
     mobile_number varchar(15),                                          #手机号
     pwd varchar(255),                                                   #密码
     car_plate varchar(15),                                              #车牌号
+    rating float,                                                       #司机评分
     lat DOUBLE,                                                         #司机当前纬度
     lng DOUBLE,                                                         #司机当前经度
     primary key (mobile_number)
@@ -37,5 +38,7 @@ CREATE TABLE Orders(
     ori_lng	float,                                                      #起点经度
     des_lat	float,                                                      #终点纬度
     des_lng	float,                                                      #终点经度
+    customer_comment varchar(255),                                      #乘客评价
+    rating int,                                                         #乘客打分
     status tinyint                                                      #是否完成，（0：未完成，1：已完成）
 );
