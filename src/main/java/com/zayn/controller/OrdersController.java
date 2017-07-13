@@ -21,7 +21,7 @@ public class OrdersController {
 
     @RequestMapping("/get-by-serial.do")
     @ResponseBody
-    private Map<String, String> getBySerial(@RequestParam("serial_num")String serial_num){
+    public Map<String, String> getBySerial(@RequestParam("serial_num")String serial_num){
         Map<String, String> res = new HashMap<String, String>();
         Orders order = repository.findBySerial_num(serial_num);
         res.put("ori_lat", order.getOri_lat());
@@ -34,7 +34,7 @@ public class OrdersController {
 
     @RequestMapping("/get-by-rec.do")
     @ResponseBody
-    private Map<String, ArrayList<String>> getByRec(@RequestParam("rec_mobile_num")String rec_mobile_num){
+    public Map<String, ArrayList<String>> getByRec(@RequestParam("rec_mobile_num")String rec_mobile_num){
         Map<String, ArrayList<String>> res = new HashMap<String, ArrayList<String>>();
         for(Orders order : repository.findByRec_mobile_num(rec_mobile_num)){
             ArrayList<String> detail = new ArrayList<String>();
@@ -50,7 +50,7 @@ public class OrdersController {
 
     @RequestMapping("/get-by-call.do")
     @ResponseBody
-    private Map<String, ArrayList<String>> getByCall(@RequestParam("call_serial")String call_serial){
+    public Map<String, ArrayList<String>> getByCall(@RequestParam("call_serial")String call_serial){
         Map<String, ArrayList<String>> res = new HashMap<String, ArrayList<String>>();
         for(Orders order : repository.findByRec_mobile_num(call_serial)){
             ArrayList<String> detail = new ArrayList<String>();
@@ -66,7 +66,7 @@ public class OrdersController {
 
     @RequestMapping("/place-order.do")
     @ResponseBody
-    private String placeOrder(@RequestParam() Map<String, String> orderInfo){
+    public String placeOrder(@RequestParam() Map<String, String> orderInfo){
         String status = "success!";
         Orders order = new Orders();
         Long time = Long.parseLong(orderInfo.get("apt_time"));

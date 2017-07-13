@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -68,5 +69,16 @@ public class CustomerController {
             }
         }
         return Charset.forName("UTF-8").encode(status).array();
+    }
+
+    @RequestMapping("/retrieve-customer-info,do")
+    @ResponseBody
+    public Map<String, String> retrieveCustomerInfo(@RequestParam("serial_num") String serial_num){
+        Map<String, String> customerInfo = new HashMap<String, String>();
+        Customers c = repository.findBySerial_num(serial_num);
+        customerInfo.put("mobile_number", c.getMobile_number());
+        customerInfo.put("user_name", c.getUser_name());
+        customerInfo.put("sex", c.getSex());
+        return customerInfo;
     }
 }

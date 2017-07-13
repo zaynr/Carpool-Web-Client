@@ -1,9 +1,9 @@
 use users;
 
-DROP TABLE Customers;
-DROP TABLE Drivers;
-DROP TABLE Friends;
-DROP TABLE Orders;
+DROP TABLE IF EXISTS Customers;
+DROP TABLE IF EXISTS Drivers;
+DROP TABLE IF EXISTS Friends;
+DROP TABLE IF EXISTS Orders;
 
 CREATE TABLE Customers(
     user_name varchar(20),          
