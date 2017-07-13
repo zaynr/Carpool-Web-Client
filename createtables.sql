@@ -21,6 +21,8 @@ CREATE TABLE Drivers(
     rating float,                                                       #司机评分
     lat DOUBLE,                                                         #司机当前纬度
     lng DOUBLE,                                                         #司机当前经度
+    fin_deals int,                                                      #已完成订单数
+    rating FLOAT,                                                       #信用星级
     primary key (mobile_number)
 );
 CREATE TABLE Friends(
