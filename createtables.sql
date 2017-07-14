@@ -3,6 +3,7 @@ use users;
 DROP TABLE IF EXISTS Customers;
 DROP TABLE IF EXISTS Drivers;
 DROP TABLE IF EXISTS Friends;
+DROP TABLE IF EXISTS FriendRequests;
 DROP TABLE IF EXISTS Orders;
 
 CREATE TABLE Customers(
@@ -25,6 +26,11 @@ CREATE TABLE Drivers(
     primary key (mobile_number)
 );
 CREATE TABLE Friends(
+    serial_num int primary key not  null  auto_increment,
+    userial1 int,
+    userial2 int
+);
+CREATE TABLE FriendRequests(
     serial_num int primary key not  null  auto_increment,
     userial1 int,
     userial2 int
