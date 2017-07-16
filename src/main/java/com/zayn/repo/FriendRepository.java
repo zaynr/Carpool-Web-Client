@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by zaynr on 2017/7/14.
@@ -18,7 +18,7 @@ import java.util.List;
 public interface FriendRepository extends CrudRepository<Friends, Long> {
     @Query(value = "SELECT * FROM Friends WHERE userial1 = :serial_num OR userial2 = :serial_num"
             , nativeQuery = true)
-    List<Friends> findByUserial(@Param("serial_num") int serial_num);
+    ArrayList<Friends> findByUserial(@Param("serial_num") int serial_num);
 
     @Query(value = "SELECT * FROM Friends WHERE (userial1 = :userial1 AND userial2 = :userial2) OR (userial1 = :userial2 AND userial2 = :userial1) LIMIT 1", nativeQuery = true)
     Friends findPerfectMatch(@Param("userial1") int userial1, @Param("userial2") int userial2);

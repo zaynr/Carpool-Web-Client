@@ -19,6 +19,12 @@ public class OrdersController {
     @Autowired
     private OrderRepository repository;
 
+    @RequestMapping("get-dispatch-order.do")
+    @ResponseBody
+    public Orders getDispatchOrder(){
+
+    }
+
     @RequestMapping("/get-by-serial.do")
     @ResponseBody
     public ArrayList<HashMap<String, String>> getBySerial(@RequestParam("serial_num")String serial_num){

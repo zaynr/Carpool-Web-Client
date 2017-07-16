@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by zaynr on 2017/7/14.
@@ -47,7 +47,7 @@ public class FriendsController {
     public String addFriend(@RequestParam("userial1") int userial1
             , @RequestParam("userial2") int userial2){
         String status = "success";
-        if(friendRepository.findPerfectMatch(userial1, userial2) == null){
+        if(requestRepository.findPerfectMatch(userial1, userial2) == null){
             FriendRequests request = new FriendRequests();
             request.setUserial1(userial1);
             request.setUserial2(userial2);
@@ -71,5 +71,17 @@ public class FriendsController {
     public void deleteFriend(@RequestParam("userial1") int userial1
             , @RequestParam("userial2") int userial2){
         friendRepository.deletePerfectMatch(userial1, userial2);
+    }
+
+    @RequestMapping("/show-requests.do")
+    @ResponseBody
+    public ArrayList<FriendRequests> showRequest(@RequestParam("userial1") int userial1){
+        return requestRepository.findByUserial(userial1);
+    }
+
+    @RequestMapping("/show-friends.do")
+    @ResponseBody
+    public ArrayList<Friends> showFriend(@RequestParam("userial1") int userial1){
+        return friendRepository.findByUserial(userial1);
     }
 }
