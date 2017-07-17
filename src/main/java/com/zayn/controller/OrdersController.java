@@ -44,7 +44,8 @@ public class OrdersController {
         int cur_serial = 0;
         GetDistanceUtil util;
         for(Orders order : repository.findAllUndone()){
-            dest = new LatLng(Double.parseDouble(order.getOri_lat()), Double.parseDouble(order.getOri_lng()));
+            dest =
+                    new LatLng(Double.parseDouble(order.getOri_lat()), Double.parseDouble(order.getOri_lng()));
             util = new GetDistanceUtil(ori, dest);
             if(cur_dis > util.getDistance()){
                 cur_dis = util.getDistance();
