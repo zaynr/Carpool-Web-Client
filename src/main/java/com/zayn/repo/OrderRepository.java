@@ -1,6 +1,7 @@
 package com.zayn.repo;
 
 import com.zayn.bean.Orders;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +17,7 @@ import java.util.List;
 @Transactional
 public interface OrderRepository extends CrudRepository<Orders, Long>{
     @Query(value = "SELECT * FROM Orders WHERE serial_num = :serial_num", nativeQuery = true)
-    Orders findBySerial_num(@Param("serial_num")String serial_num);
+    Orders findBySerial_num(@Param("serial_num")int serial_num);
 
     @Query(value = "SELECT * FROM Orders WHERE rec_mobile_num = :rec_mobile_num", nativeQuery = true)
     List<Orders> findByRec_mobile_num(@Param("rec_mobile_num")String rec_mobile_num);
@@ -26,4 +27,12 @@ public interface OrderRepository extends CrudRepository<Orders, Long>{
 
     @Query(value = "SELECT * FROM Orders WHERE status = 0", nativeQuery = true)
     List<Orders> findAllUndone();
+
+    @Modifying
+    @Query(value = "UPDATE Orders SET status = 1, rec_mobile_num = :rec_mobile_num WHERE serial_num = :serial_num", nativeQuery = true)
+    void recOrder(@Param("serial_num") int serial_num, @Param("rec_mobile_num")String rec_mobile_num);
+
+    @Modifying
+    @Query(value = "UPDATE Orders SET status = 0, rec_mobile_num = '' WHERE serial_num = :serial_num", nativeQuery = true)
+    void cancleOrder(@Param("serial_num") int serial_num);
 }

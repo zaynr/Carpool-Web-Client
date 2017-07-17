@@ -1,7 +1,10 @@
 package com.zayn.controller;
 
 import com.zayn.bean.Orders;
+import com.zayn.repo.DriverRepository;
 import com.zayn.repo.OrderRepository;
+import com.zayn.util.GetDistanceUtil;
+import com.zayn.util.LatLng;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,16 +21,43 @@ import java.util.*;
 public class OrdersController {
     @Autowired
     private OrderRepository repository;
+    @Autowired
+    private DriverRepository driverRepository;
 
-    @RequestMapping("get-dispatch-order.do")
+    @RequestMapping("/cancel-order.do")
     @ResponseBody
-    public Orders getDispatchOrder(){
+    public void cancelOrder(@RequestParam("serial_num")int serial_num){
+        repository.cancleOrder(serial_num);
+    }
 
+    @RequestMapping("/get-dispatched.do")
+    @ResponseBody
+    public Orders getDispatched(@RequestParam("rec_mobile_num") String rec_mobile_num){
+        double ori_lat, ori_lng;
+        LatLng ori, dest;
+        ori_lat = Double.parseDouble(driverRepository
+                .findByMobile_number(rec_mobile_num).getLat());
+        ori_lng = Double.parseDouble(driverRepository
+                .findByMobile_number(rec_mobile_num).getLng());
+        ori = new LatLng(ori_lat, ori_lng);
+        double cur_dis = Long.MAX_VALUE;
+        int cur_serial = 0;
+        GetDistanceUtil util;
+        for(Orders order : repository.findAllUndone()){
+            dest = new LatLng(Double.parseDouble(order.getOri_lat()), Double.parseDouble(order.getOri_lng()));
+            util = new GetDistanceUtil(ori, dest);
+            if(cur_dis > util.getDistance()){
+                cur_dis = util.getDistance();
+                cur_serial = order.getSerial_num();
+            }
+        }
+        repository.recOrder(cur_serial, rec_mobile_num);
+        return repository.findBySerial_num(cur_serial);
     }
 
     @RequestMapping("/get-by-serial.do")
     @ResponseBody
-    public ArrayList<HashMap<String, String>> getBySerial(@RequestParam("serial_num")String serial_num){
+    public ArrayList<HashMap<String, String>> getBySerial(@RequestParam("serial_num")int serial_num){
         ArrayList<HashMap<String, String>> res = new ArrayList<HashMap<String, String>>();
         Orders order = repository.findBySerial_num(serial_num);
         res = packResultSet(order, res);

@@ -47,5 +47,5 @@ CREATE TABLE Orders(
     des_lng	float,                                                      #终点经度
     customer_comment varchar(255),                                      #乘客评价
     rating int,                                                         #乘客打分
-    status tinyint                                                      #是否完成，（0：未完成，1：已完成）
+    status tinyint                                                      #是否完成，（0：未接，1：已接，2：已完成）
 );
