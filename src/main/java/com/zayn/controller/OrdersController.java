@@ -111,7 +111,7 @@ public class OrdersController {
     @ResponseBody
     public ArrayList<HashMap<String, String>> getByCall(@RequestParam("call_serial")String call_serial){
         ArrayList<HashMap<String, String>> res = new ArrayList<HashMap<String, String>>();
-        for(Orders order : repository.findByRec_mobile_num(call_serial)){
+        for(Orders order : repository.findByCall_serial(call_serial)){
             res = packResultSet(order, res);
         }
         return res;
