@@ -13,7 +13,23 @@ public class Orders {
     private int serial_num;
 
     private String call_serial,rec_mobile_num,call_type,ori_lat,
-        ori_lng,des_lat,des_lng,status;
+        ori_lng,des_lat,des_lng,status, ori_address, des_address;
+
+    public String getOri_address() {
+        return ori_address;
+    }
+
+    public void setOri_address(String ori_address) {
+        this.ori_address = ori_address;
+    }
+
+    public String getDes_address() {
+        return des_address;
+    }
+
+    public void setDes_address(String des_address) {
+        this.des_address = des_address;
+    }
 
     @Column(name="apt_time")
     private Date apt_time;
