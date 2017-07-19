@@ -24,7 +24,17 @@ public class OrdersController {
     @Autowired
     private DriverRepository driverRepository;
 
+<<<<<<< HEAD
     //灌水
+=======
+    @RequestMapping("/confirm-order.do")
+    @ResponseBody
+    public void confirmOrder(@RequestParam("serial_num")int serial_num, @RequestParam("rec_mobile_num")
+            String rec_mobile_num){
+        repository.recOrder(serial_num, rec_mobile_num);
+    }
+
+>>>>>>> ee85034a61458acae5fd534f6baeb59ec900c984
     @RequestMapping("/cancel-order.do")
     @ResponseBody
     public void cancelOrder(@RequestParam("serial_num")int serial_num){
@@ -45,8 +55,7 @@ public class OrdersController {
         int cur_serial = 0;
         GetDistanceUtil util;
         for(Orders order : repository.findAllUndone()){
-            dest =
-                    new LatLng(Double.parseDouble(order.getOri_lat()), Double.parseDouble(order.getOri_lng()));
+            dest = new LatLng(Double.parseDouble(order.getOri_lat()), Double.parseDouble(order.getOri_lng()));
             util = new GetDistanceUtil(ori, dest);
             if(cur_dis > util.getDistance()){
                 cur_dis = util.getDistance();
@@ -94,6 +103,8 @@ public class OrdersController {
         detail.put("ori_lng", order.getOri_lng());
         detail.put("des_lat", order.getDes_lat());
         detail.put("des_lng", order.getDes_lng());
+        detail.put("des_address", order.getDes_address());
+        detail.put("ori_address", order.getOri_address());
         detail.put("apt_time", order.getApt_time().toString());
         detail.put("serial_num", String.valueOf(order.getSerial_num()));
         res.add(detail);
@@ -104,7 +115,7 @@ public class OrdersController {
     @ResponseBody
     public ArrayList<HashMap<String, String>> getByCall(@RequestParam("call_serial")String call_serial){
         ArrayList<HashMap<String, String>> res = new ArrayList<HashMap<String, String>>();
-        for(Orders order : repository.findByRec_mobile_num(call_serial)){
+        for(Orders order : repository.findByCall_serial(call_serial)){
             res = packResultSet(order, res);
         }
         return res;
@@ -123,6 +134,8 @@ public class OrdersController {
         order.setDes_lng(orderInfo.get("des_lng"));
         order.setCall_serial(orderInfo.get("call_serial"));
         order.setCall_type(orderInfo.get("call_type"));
+        order.setOri_address(orderInfo.get("ori_address"));
+        order.setDes_address(orderInfo.get("des_address"));
         order.setStatus("0");
         repository.save(order);
         return status;
