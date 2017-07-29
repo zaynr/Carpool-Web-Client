@@ -24,6 +24,9 @@ public class OrdersController {
     @Autowired
     private DriverRepository driverRepository;
 
+<<<<<<< HEAD
+    //灌水
+=======
     @RequestMapping("/confirm-order.do")
     @ResponseBody
     public void confirmOrder(@RequestParam("serial_num")int serial_num, @RequestParam("rec_mobile_num")
@@ -31,6 +34,7 @@ public class OrdersController {
         repository.recOrder(serial_num, rec_mobile_num);
     }
 
+>>>>>>> ee85034a61458acae5fd534f6baeb59ec900c984
     @RequestMapping("/cancel-order.do")
     @ResponseBody
     public void cancelOrder(@RequestParam("serial_num")int serial_num){
