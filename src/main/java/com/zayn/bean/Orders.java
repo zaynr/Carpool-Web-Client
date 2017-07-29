@@ -13,7 +13,23 @@ public class Orders {
     private int serial_num;
 
     private String call_serial,rec_mobile_num,call_type,ori_lat,
-        ori_lng,des_lat,des_lng,status, ori_address, des_address;
+        ori_lng,des_lat,des_lng,status, ori_address, des_address,customer_comment,rating;
+
+    public String getCustomer_comment() {
+        return customer_comment;
+    }
+
+    public void setCustomer_comment(String customer_comment) {
+        this.customer_comment = customer_comment;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
     public String getOri_address() {
         return ori_address;
