@@ -71,7 +71,7 @@ public class CustomerController {
         return Charset.forName("UTF-8").encode(status).array();
     }
 
-    @RequestMapping("/retrieve-customer-info,do")
+    @RequestMapping("/retrieve-customer-info.do")
     @ResponseBody
     public Map<String, String> retrieveCustomerInfo(@RequestParam("serial_num") String serial_num){
         Map<String, String> customerInfo = new HashMap<String, String>();
@@ -79,6 +79,22 @@ public class CustomerController {
         customerInfo.put("mobile_number", c.getMobile_number());
         customerInfo.put("user_name", c.getUser_name());
         customerInfo.put("sex", c.getSex());
+        customerInfo.put("pwd", c.getPwd());
         return customerInfo;
+    }
+
+    @RequestMapping("/update-password.do")
+    @ResponseBody
+    public String updatePassword(@RequestParam("serial_num") String serial_num, @RequestParam("old_pwd") String oldPwd
+            , @RequestParam("new_pwd") String newPwd){
+        String status = "success";
+        Customers c = repository.findBySerial_num(serial_num);
+        if(c.getPwd().equals(oldPwd)){
+            repository.updatePwd(serial_num, newPwd);
+        }
+        else{
+            status = "mismatch";
+        }
+        return status;
     }
 }
