@@ -97,4 +97,13 @@ public class CustomerController {
         }
         return status;
     }
+
+    @RequestMapping("/update-user-info.do")
+    @ResponseBody
+    public String updateUserInfo(@RequestParam() Map<String, String> param){
+        String status = "success";
+        repository.updateCustomerInfo(param.get("serial_num"), param.get("sex")
+                ,param.get("mobile_number"), param.get("user_name"));
+        return status;
+    }
 }
