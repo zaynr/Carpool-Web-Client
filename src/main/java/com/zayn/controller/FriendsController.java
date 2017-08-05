@@ -97,19 +97,24 @@ public class FriendsController {
 
     @RequestMapping("/update-driver-serve.do")
     @ResponseBody
-    public void updateDriverServe(@RequestParam() Map<String, String> param){
+    public String updateDriverServe(@RequestParam() Map<String, String> param){
+        String status = null;
         ArrayList<DriverServes> serves = serveReppository.getFriendByDriverMobileNum(param.get("rec_mobile_num"));
-        if (serves == null) {
+        if (serves == null || serves.size() == 0) {
             serveReppository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial"));
-            return;
+            status = "add new driver";
+            return status;
         }
         for(DriverServes f : serves) {
             if (f.getCall_serial().contains(param.get("call_serial"))) {
                 serveReppository.updateDriverServeTime(param.get("rec_mobile_num"), param.get("call_serial"));
+                status = "add new customer";
             } else {
                 serveReppository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial"));
+                status = "update serve count";
             }
         }
+        return status;
     }
 
 }
