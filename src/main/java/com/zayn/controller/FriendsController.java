@@ -1,7 +1,9 @@
 package com.zayn.controller;
 
+import com.zayn.bean.DriverServes;
 import com.zayn.bean.FriendRequests;
 import com.zayn.bean.Friends;
+import com.zayn.repo.DriverServeReppository;
 import com.zayn.repo.FriendRepository;
 import com.zayn.repo.FriendRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,10 @@ import java.util.Map;
 public class FriendsController {
     @Autowired
     private FriendRepository friendRepository;
-
     @Autowired
     private FriendRequestRepository requestRepository;
+    @Autowired
+    private DriverServeReppository serveReppository;
 
     @RequestMapping("/accept-request.do")
     @ResponseBody
@@ -88,18 +91,24 @@ public class FriendsController {
 
     @RequestMapping("/get-driver-serve.do")
     @ResponseBody
-    public Friends getDriverServe(@RequestParam() Map<String, String> param){
-        return friendRepository.getFriendByDriverMobileNum(param.get("rec_mobile_num"));
+    public ArrayList<DriverServes> getDriverServe(@RequestParam() Map<String, String> param){
+        return serveReppository.getFriendByDriverMobileNum(param.get("rec_mobile_num"));
     }
 
     @RequestMapping("/update-driver-serve.do")
     @ResponseBody
     public void updateDriverServe(@RequestParam() Map<String, String> param){
-        Friends f = friendRepository.getFriendByDriverMobileNum(param.get("rec_mobile_num"));
-        if(f.getCall_serial().contains(param.get("call_serial"))){
-            friendRepository.updateDriverServeTime(param.get("rec_mobile_num"), param.get("call_serial"));
-        }else{
-            friendRepository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial"));
+        ArrayList<DriverServes> serves = serveReppository.getFriendByDriverMobileNum(param.get("rec_mobile_num"));
+        if (serves == null) {
+            serveReppository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial"));
+            return;
+        }
+        for(DriverServes f : serves) {
+            if (f.getCall_serial().contains(param.get("call_serial"))) {
+                serveReppository.updateDriverServeTime(param.get("rec_mobile_num"), param.get("call_serial"));
+            } else {
+                serveReppository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial"));
+            }
         }
     }
 

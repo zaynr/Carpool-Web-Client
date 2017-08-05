@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS Drivers;
 DROP TABLE IF EXISTS Friends;
 DROP TABLE IF EXISTS FriendRequests;
 DROP TABLE IF EXISTS Orders;
-DROP TABLE IF EXISTS DriverServe;
+DROP TABLE IF EXISTS DriverServes;
 
 CREATE TABLE Customers(
     user_name nvarchar(20),          
@@ -36,7 +36,7 @@ CREATE TABLE FriendRequests(
     userial1 int,
     userial2 int
 );
-CREATE TABLE DriverServe(
+CREATE TABLE DriverServes(
     serial_num int primary key not  null  auto_increment,
     rec_mobile_num nvarchar(15),                                        #接单司机手机号
     call_serial nvarchar(15),                                           #下订单顾客工号
