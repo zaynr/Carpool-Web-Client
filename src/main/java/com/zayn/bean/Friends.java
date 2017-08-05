@@ -13,8 +13,34 @@ public class Friends {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int serial_num;
+    private int userial1;
+    private int userial2;
+    private int serve_count;
+    private String rec_mobile_num, call_serial;
 
-    private int userial1,userial2;
+    public int getServe_count() {
+        return serve_count;
+    }
+
+    public void setServe_count(int serve_count) {
+        this.serve_count = serve_count;
+    }
+
+    public String getRec_mobile_num() {
+        return rec_mobile_num;
+    }
+
+    public void setRec_mobile_num(String rec_mobile_num) {
+        this.rec_mobile_num = rec_mobile_num;
+    }
+
+    public String getCall_serial() {
+        return call_serial;
+    }
+
+    public void setCall_serial(String call_serial) {
+        this.call_serial = call_serial;
+    }
 
     public int getSerial_num() {
         return serial_num;

@@ -38,8 +38,8 @@ CREATE TABLE FriendRequests(
 );
 CREATE TABLE DriverServe(
     serial_num int primary key not  null  auto_increment,
-    rec_mobile_num int,                                                 #接单司机手机号
-    call_serial int,                                                    #下订单顾客工号
+    rec_mobile_num nvarchar(15),                                        #接单司机手机号
+    call_serial nvarchar(15),                                           #下订单顾客工号
     serve_count int
 );
 CREATE TABLE Orders(
