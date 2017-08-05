@@ -21,4 +21,13 @@ public interface DriverRepository extends CrudRepository<Drivers, Long> {
     @Modifying
     @Query(value = "UPDATE Drivers SET lat=:lat, lng=:lng WHERE mobile_number = :mobile_number", nativeQuery = true)
     void updateDriverLoc(@Param("lat")String lat, @Param("lng")String lng, @Param("mobile_number")String mobile_number);
+
+    @Modifying
+    @Query(value = "UPDATE Drivers SET driver_name=:driver_name, car_plate=:car_plate WHERE mobile_number = :mobile_number", nativeQuery = true)
+    void updateDriverInfo(@Param("driver_name")String driver_name, @Param("car_plate")String car_plate
+            , @Param("mobile_number")String mobile_number);
+
+    @Modifying
+    @Query(value = "UPDATE Drivers SET pwd=:pwd WHERE mobile_number = :mobile_number", nativeQuery = true)
+    void updateDriverPwd(@Param("pwd")String pwd, @Param("mobile_number")String mobile_number);
 }

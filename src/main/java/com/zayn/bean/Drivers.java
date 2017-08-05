@@ -13,6 +13,16 @@ public class Drivers {
 
     private String driver_name, car_plate, pwd, lat, lng;
 
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    private float rating;
+
     public String getLat() {
         return lat;
     }

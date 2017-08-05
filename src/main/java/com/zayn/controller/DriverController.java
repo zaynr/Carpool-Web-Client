@@ -35,6 +35,14 @@ public class DriverController {
         return "driver-login";
     }
 
+    @RequestMapping("/retrieve-driver-info.do")
+    @ResponseBody
+    public Drivers retrieveDriverInfo(@RequestParam() Map<String, String> userInfo){
+        Drivers res;
+        res = repository.findByMobile_number(userInfo.get("mobile_number"));
+        return res;
+    }
+
     @RequestMapping("/post-register-data.do")
     @ResponseBody
     public String postData(@RequestParam() Map<String, String> userInfo){
@@ -48,8 +56,9 @@ public class DriverController {
         if(status.equals("success!")){
             Drivers driver = new Drivers();
             driver.setMobile_number(userInfo.get("userInfo[mobile_number]"));
-            driver.setCar_plate(userInfo.get("userInfo[car_plate]"));
-            driver.setDriver_name(userInfo.get("userInfo[name]"));
+            driver.setCar_plate("请设置车牌号");
+            driver.setDriver_name("司机用户");
+            driver.setRating(5.0f);
             driver.setPwd(userInfo.get("userInfo[password]"));
             repository.save(driver);
         }
@@ -103,5 +112,26 @@ public class DriverController {
     public void updateLoc(@RequestParam(name = "mobile_number")String mobile_number,
                           @RequestParam("lat")String lat,@RequestParam("lng")String lng){
         repository.updateDriverLoc(lat,lng,mobile_number);
+    }
+
+    @RequestMapping("/update-user-info.do")
+    @ResponseBody
+    public void updateInfo(@RequestParam() Map<String, String> param){
+        repository.updateDriverInfo(param.get("driver_name"), param.get("car_plate"), param.get("mobile_number"));
+    }
+
+
+    @RequestMapping("/update-password.do")
+    @ResponseBody
+    public String updatePassword(@RequestParam() Map<String, String> param){
+        String status = "success";
+        Drivers c = repository.findByMobile_number(param.get("mobile_number"));
+        if(c.getPwd().equals(param.get("old_pwd"))){
+            repository.updateDriverPwd(param.get("new_pwd"), param.get("mobile_number"));
+        }
+        else{
+            status = "mismatch";
+        }
+        return status;
     }
 }
