@@ -1,6 +1,8 @@
 package com.zayn.controller;
 
+import com.zayn.bean.Customers;
 import com.zayn.bean.Orders;
+import com.zayn.repo.CustomerRepository;
 import com.zayn.repo.DriverRepository;
 import com.zayn.repo.OrderRepository;
 import com.zayn.util.GetDistanceUtil;
@@ -23,6 +25,8 @@ public class OrdersController {
     private OrderRepository repository;
     @Autowired
     private DriverRepository driverRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @RequestMapping("/confirm-order.do")
     @ResponseBody
@@ -106,6 +110,9 @@ public class OrdersController {
         detail.put("ori_address", order.getOri_address());
         detail.put("apt_time", order.getApt_time().toString());
         detail.put("serial_num", String.valueOf(order.getSerial_num()));
+        Customers c = customerRepository.findBySerial_num(order.getCall_serial());
+        detail.put("customer_name", c.getUser_name());
+        detail.put("customer_mobile_number", c.getMobile_number());
         res.add(detail);
         return res;
     }
