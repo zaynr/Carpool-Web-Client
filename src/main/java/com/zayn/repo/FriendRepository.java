@@ -29,4 +29,14 @@ public interface FriendRepository extends CrudRepository<Friends, Long> {
 
     @Query(value = "SELECT * FROM DriverServe WHERE rec_mobile_num = :rec_mobile_num", nativeQuery = true)
     Friends getFriendByDriverMobileNum(@Param("rec_mobile_num") String rec_mobile_num);
+
+    @Modifying
+    @Query(value = "UPDATE DriverServe SET serve_count = serve_count + 1 WHERE rec_mobile_num = :rec_mobile_num" +
+            " AND call_serial = :call_serial", nativeQuery = true)
+    void updateDriverServeTime(@Param("rec_mobile_num") String rec_mobile_num, @Param("call_serial") String call_serial);
+
+    @Modifying
+    @Query(value = "INSERT INTO DriverServe(rec_mobile_num, call_serial, serve_count) VALUES (:rec_mobile_num," +
+            " :call_serial, 1)", nativeQuery = true)
+    void updateDriverServeMan(@Param("rec_mobile_num") String rec_mobile_num, @Param("call_serial") String call_serial);
 }

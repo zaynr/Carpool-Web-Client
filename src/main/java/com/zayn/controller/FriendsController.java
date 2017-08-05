@@ -95,7 +95,12 @@ public class FriendsController {
     @RequestMapping("/update-driver-serve.do")
     @ResponseBody
     public void updateDriverServe(@RequestParam() Map<String, String> param){
-        
+        Friends f = friendRepository.getFriendByDriverMobileNum(param.get("rec_mobile_num"));
+        if(f.getCall_serial().contains(param.get("call_serial"))){
+            friendRepository.updateDriverServeTime(param.get("rec_mobile_num"), param.get("call_serial"));
+        }else{
+            friendRepository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial"));
+        }
     }
 
 }
