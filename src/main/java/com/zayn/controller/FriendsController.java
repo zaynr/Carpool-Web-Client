@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by zaynr on 2017/7/14.
@@ -84,4 +85,17 @@ public class FriendsController {
     public ArrayList<Friends> showFriend(@RequestParam("userial1") int userial1){
         return friendRepository.findByUserial(userial1);
     }
+
+    @RequestMapping("/get-driver-serve.do")
+    @ResponseBody
+    public Friends getDriverServe(@RequestParam() Map<String, String> param){
+        return friendRepository.getFriendByDriverMobileNum(param.get("rec_mobile_num"));
+    }
+
+    @RequestMapping("/update-driver-serve.do")
+    @ResponseBody
+    public void updateDriverServe(@RequestParam() Map<String, String> param){
+        
+    }
+
 }

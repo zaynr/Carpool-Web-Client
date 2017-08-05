@@ -26,4 +26,7 @@ public interface FriendRepository extends CrudRepository<Friends, Long> {
     @Modifying
     @Query(value = "DELETE FROM Friends WHERE (userial1 = :userial1 AND userial2 = :userial2) OR (userial1 = :userial2 AND userial2 = :userial1)", nativeQuery = true)
     void deletePerfectMatch(@Param("userial1") int userial1, @Param("userial2") int userial2);
+
+    @Query(value = "SELECT * FROM DriverServe WHERE rec_mobile_num = :rec_mobile_num", nativeQuery = true)
+    Friends getFriendByDriverMobileNum(@Param("rec_mobile_num") String rec_mobile_num);
 }
