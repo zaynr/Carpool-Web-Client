@@ -47,8 +47,9 @@ public class CustomerController {
         if(status.equals("success!")){
             Customers customers = new Customers();
             customers.setMobile_number("请设置手机号");
+            customers.setSex("你猜我猜不猜");
             customers.setSerial_num(userInfo.get("userInfo[serial_number]"));
-            customers.setUser_name("恒生员工");
+            customers.setUser_name("恒生员工" + userInfo.get("userInfo[serial_number]"));
             customers.setPwd(userInfo.get("userInfo[password]"));
             repository.save(customers);
         }

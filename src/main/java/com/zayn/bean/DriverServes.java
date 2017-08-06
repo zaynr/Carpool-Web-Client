@@ -11,6 +11,9 @@ public class DriverServes {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int serial_num;
 
+    private int serve_count;
+    private String rec_mobile_num, call_serial, call_mobile_num, call_name;
+
     public int getSerial_num() {
         return serial_num;
     }
@@ -19,8 +22,21 @@ public class DriverServes {
         this.serial_num = serial_num;
     }
 
-    private int serve_count;
-    private String rec_mobile_num, call_serial;
+    public String getCall_mobile_num() {
+        return call_mobile_num;
+    }
+
+    public void setCall_mobile_num(String call_mobile_num) {
+        this.call_mobile_num = call_mobile_num;
+    }
+
+    public String getCall_name() {
+        return call_name;
+    }
+
+    public void setCall_name(String call_name) {
+        this.call_name = call_name;
+    }
 
     public int getServe_count() {
         return serve_count;

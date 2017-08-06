@@ -1,8 +1,10 @@
 package com.zayn.controller;
 
+import com.zayn.bean.Customers;
 import com.zayn.bean.DriverServes;
 import com.zayn.bean.FriendRequests;
 import com.zayn.bean.Friends;
+import com.zayn.repo.CustomerRepository;
 import com.zayn.repo.DriverServeReppository;
 import com.zayn.repo.FriendRepository;
 import com.zayn.repo.FriendRequestRepository;
@@ -21,6 +23,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/friend")
 public class FriendsController {
+    @Autowired
+    private CustomerRepository customerRepository;
     @Autowired
     private FriendRepository friendRepository;
     @Autowired
@@ -101,17 +105,21 @@ public class FriendsController {
         String status = null;
         ArrayList<DriverServes> serves = serveReppository.getFriendByDriverMobileNum(param.get("rec_mobile_num"));
         if (serves == null || serves.size() == 0) {
-            serveReppository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial"));
+            Customers c = customerRepository.findBySerial_num(param.get("call_serial"));
+            serveReppository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial")
+                    , c.getUser_name(), c.getMobile_number());
             status = "add new driver";
             return status;
         }
         for(DriverServes f : serves) {
-            if (f.getCall_serial().contains(param.get("call_serial"))) {
+            if (f.getCall_serial().equals(param.get("call_serial"))) {
                 serveReppository.updateDriverServeTime(param.get("rec_mobile_num"), param.get("call_serial"));
-                status = "add new customer";
-            } else {
-                serveReppository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial"));
                 status = "update serve count";
+            } else {
+                Customers c = customerRepository.findBySerial_num(param.get("call_serial"));
+                serveReppository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial")
+                        , c.getUser_name(), c.getMobile_number());
+                status = "add new customer";
             }
         }
         return status;

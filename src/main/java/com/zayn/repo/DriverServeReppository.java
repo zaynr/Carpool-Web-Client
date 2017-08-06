@@ -23,7 +23,8 @@ public interface DriverServeReppository extends CrudRepository<DriverServes, Lon
     void updateDriverServeTime(@Param("rec_mobile_num") String rec_mobile_num, @Param("call_serial") String call_serial);
 
     @Modifying
-    @Query(value = "INSERT INTO DriverServes(rec_mobile_num, call_serial, serve_count) VALUES (:rec_mobile_num," +
-            " :call_serial, 1)", nativeQuery = true)
-    void updateDriverServeMan(@Param("rec_mobile_num") String rec_mobile_num, @Param("call_serial") String call_serial);
+    @Query(value = "INSERT INTO DriverServes(rec_mobile_num, call_serial, serve_count, call_mobile_num, call_name) VALUES (:rec_mobile_num," +
+            " :call_serial, 1, :call_mobile_num, :call_name)", nativeQuery = true)
+    void updateDriverServeMan(@Param("rec_mobile_num") String rec_mobile_num, @Param("call_serial") String call_serial
+            ,@Param("call_name") String call_name, @Param("call_mobile_num") String call_mobile_num);
 }
