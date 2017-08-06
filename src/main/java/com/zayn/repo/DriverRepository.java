@@ -30,4 +30,8 @@ public interface DriverRepository extends CrudRepository<Drivers, Long> {
     @Modifying
     @Query(value = "UPDATE Drivers SET pwd=:pwd WHERE mobile_number = :mobile_number", nativeQuery = true)
     void updateDriverPwd(@Param("pwd")String pwd, @Param("mobile_number")String mobile_number);
+
+    @Modifying
+    @Query(value = "UPDATE Drivers SET rating=(:rating+rating)/2 WHERE mobile_number = :mobile_number", nativeQuery = true)
+    void updateDriverRating(@Param("rating")float rating, @Param("mobile_number")String mobile_number);
 }

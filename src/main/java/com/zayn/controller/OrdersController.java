@@ -146,4 +146,15 @@ public class OrdersController {
         repository.save(order);
         return status;
     }
+
+    @RequestMapping("/finish-order.do")
+    @ResponseBody
+    public void finishOrder(@RequestParam() Map<String, String> param){
+        float rating = Float.parseFloat(param.get("rating"));
+        String comment = param.get("comment");
+        int serialNum = Integer.parseInt(param.get("serial_num"));
+        String recMobileNum = param.get("rec_mobile_num");
+        driverRepository.updateDriverRating(rating, recMobileNum);
+        repository.finishOrder(comment, rating, serialNum);
+    }
 }

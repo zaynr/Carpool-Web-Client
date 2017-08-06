@@ -1,2 +1,4 @@
-# 踩的坑
-操作数据（UPDATE，DELETE）的时候必须要在@Query注解上再添加一个@Modifying的注解，不然会返回‘could not extract ResultSet’的错误——坑了老子两三个小时才发现原因。
+# 恒生拼车系统 WEB 端
+该 repo 提供了对数据进行操作的接口，在工程文件内同时包含了数据库的建表文件 CREATETABLES.sql，运行前需要建库名为 users 的库，该库内已经包含了测试用的账号，司机与乘客的户名与密码均为“123”。
+
+采用 Spring MVC 编写，数据源配置储存在 WEB-INF/config/ 下。
