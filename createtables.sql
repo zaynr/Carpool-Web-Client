@@ -12,6 +12,7 @@ CREATE TABLE Customers(
     serial_num int,                                                     #工号
     sex nvarchar(20),                                                     #性别
     mobile_number nvarchar(20),                                          #手机号
+    rating float,                                                       #乘客评分
     pwd nvarchar(255),                                                   #密码
     primary key (serial_num)
 );
