@@ -36,7 +36,10 @@ public class FriendsController {
     @ResponseBody
     public String acceptRequest(@RequestParam("userial1") int userial1
             , @RequestParam("userial2") int userial2){
-        String status = "success";
+        if(customerRepository.findBySerial_num(String.valueOf(userial1)) == null
+                || customerRepository.findBySerial_num(String.valueOf(userial2)) == null){
+            return "no_such_man";
+        }
         if(friendRepository.findPerfectMatch(userial1, userial2) == null){
             Friends friend = new Friends();
             friend.setUserial1(userial1);
@@ -45,9 +48,9 @@ public class FriendsController {
             requestRepository.deletePerfectMatch(userial1, userial2);
         }
         else{
-            status = "fail";
+            return "fail";
         }
-        return status;
+        return "success";
     }
 
     @RequestMapping("/add-friend.do")
@@ -89,8 +92,21 @@ public class FriendsController {
 
     @RequestMapping("/show-friends.do")
     @ResponseBody
-    public ArrayList<Friends> showFriend(@RequestParam("userial1") int userial1){
-        return friendRepository.findByUserial(userial1);
+    public ArrayList<Customers> showFriend(@RequestParam("userial1") int userial1){
+        ArrayList<Friends> friends = friendRepository.findByUserial(userial1);
+        ArrayList<Customers> customers = new ArrayList<Customers>();
+        for(Friends f : friends){
+            Customers c;
+            if(f.getUserial1()==userial1){
+                c = customerRepository.findBySerial_num(String.valueOf(f.getUserial2()));
+                customers.add(c);
+            }
+            else{
+                c = customerRepository.findBySerial_num(String.valueOf(f.getUserial1()));
+                customers.add(c);
+            }
+        }
+        return customers;
     }
 
     @RequestMapping("/get-driver-serve.do")
