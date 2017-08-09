@@ -13,6 +13,16 @@ public class Customers {
 
     private String user_name, sex, mobile_number, pwd;
 
+    private float rating;
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
     public String getUser_name() {
         return user_name;
     }

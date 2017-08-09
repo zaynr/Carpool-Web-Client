@@ -114,6 +114,7 @@ public class OrdersController {
         Customers c = customerRepository.findBySerial_num(order.getCall_serial());
         detail.put("customer_name", c.getUser_name());
         detail.put("customer_mobile_number", c.getMobile_number());
+        detail.put("customer_rating", String.valueOf(c.getRating()));
         res.add(detail);
         return res;
     }
