@@ -97,6 +97,7 @@ public class OrdersController {
 
     private ArrayList<HashMap<String, String>> packResultSet(Orders order, ArrayList<HashMap<String, String>> res){
         HashMap<String, String> detail = new HashMap<String, String>();
+        detail.put("call_type", order.getCall_type());
         detail.put("status", order.getStatus());
         detail.put("customer_comment", order.getCustomer_comment());
         detail.put("rating", order.getRating());
