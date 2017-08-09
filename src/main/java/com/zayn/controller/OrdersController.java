@@ -144,7 +144,8 @@ public class OrdersController {
         order.setDes_address(orderInfo.get("des_address"));
         order.setStatus("0");
         repository.save(order);
-        return status;
+        List<Orders> orders = repository.findByCall_serial(orderInfo.get("call_serial"));
+        return String.valueOf(orders.get(orders.size() - 1).getSerial_num());
     }
 
     @RequestMapping("/finish-order.do")
