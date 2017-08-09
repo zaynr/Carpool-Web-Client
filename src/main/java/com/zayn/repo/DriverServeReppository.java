@@ -18,9 +18,9 @@ public interface DriverServeReppository extends CrudRepository<DriverServes, Lon
     ArrayList<DriverServes> getFriendByDriverMobileNum(@Param("rec_mobile_num") String rec_mobile_num);
 
     @Modifying
-    @Query(value = "UPDATE DriverServes SET serve_count = serve_count + 1 WHERE rec_mobile_num = :rec_mobile_num" +
+    @Query(value = "UPDATE DriverServes SET serve_count = serve_count + 1, call_mobile_num = :call_mobile_num WHERE rec_mobile_num = :rec_mobile_num" +
             " AND call_serial = :call_serial", nativeQuery = true)
-    void updateDriverServeTime(@Param("rec_mobile_num") String rec_mobile_num, @Param("call_serial") String call_serial);
+    void updateDriverServeTime(@Param("rec_mobile_num") String rec_mobile_num, @Param("call_serial") String call_serial, @Param("call_mobile_num") String call_mobile_num);
 
     @Modifying
     @Query(value = "INSERT INTO DriverServes(rec_mobile_num, call_serial, serve_count, call_mobile_num, call_name) VALUES (:rec_mobile_num," +

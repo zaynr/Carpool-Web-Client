@@ -120,8 +120,8 @@ public class FriendsController {
     public String updateDriverServe(@RequestParam() Map<String, String> param){
         String status = null;
         ArrayList<DriverServes> serves = serveReppository.getFriendByDriverMobileNum(param.get("rec_mobile_num"));
+        Customers c = customerRepository.findBySerial_num(param.get("call_serial"));
         if (serves == null || serves.size() == 0) {
-            Customers c = customerRepository.findBySerial_num(param.get("call_serial"));
             serveReppository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial")
                     , c.getUser_name(), c.getMobile_number());
             status = "add new driver";
@@ -129,10 +129,9 @@ public class FriendsController {
         }
         for(DriverServes f : serves) {
             if (f.getCall_serial().equals(param.get("call_serial"))) {
-                serveReppository.updateDriverServeTime(param.get("rec_mobile_num"), param.get("call_serial"));
+                serveReppository.updateDriverServeTime(param.get("rec_mobile_num"), param.get("call_serial"), c.getMobile_number());
                 status = "update serve count";
             } else {
-                Customers c = customerRepository.findBySerial_num(param.get("call_serial"));
                 serveReppository.updateDriverServeMan(param.get("rec_mobile_num"), param.get("call_serial")
                         , c.getUser_name(), c.getMobile_number());
                 status = "add new customer";
