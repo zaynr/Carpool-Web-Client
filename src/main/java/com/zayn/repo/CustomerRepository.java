@@ -23,6 +23,10 @@ public interface CustomerRepository extends CrudRepository<Customers, Long> {
     void updatePwd(@Param("serial_num") String serial_num, @Param("pwd") String pwd);
 
     @Modifying
+    @Query(value = "UPDATE Customers SET rating = (:rating + rating)/2 WHERE serial_num = :serial_num", nativeQuery = true)
+    void updateRating(@Param("rating") float rating, @Param("serial_num") String serial_num);
+
+    @Modifying
     @Query(value = "UPDATE Customers SET sex = :sex, mobile_number = :mobile_number," +
             "user_name = :user_name WHERE serial_num = :serial_num")
     void updateCustomerInfo(@Param("serial_num") String serial_num, @Param("sex") String sex

@@ -39,4 +39,8 @@ public interface OrderRepository extends CrudRepository<Orders, Long>{
     @Modifying
     @Query(value = "UPDATE Orders SET customer_comment = :comment, rating = :rating WHERE serial_num = :serial_num", nativeQuery = true)
     void finishOrder(@Param("comment") String comment, @Param("rating") float rating, @Param("serial_num") int serial_num);
+
+    @Modifying
+    @Query(value = "UPDATE Orders SET status = 2 WHERE serial_num = :serial_num", nativeQuery = true)
+    void endOrder(@Param("serial_num") int serial_num);
 }

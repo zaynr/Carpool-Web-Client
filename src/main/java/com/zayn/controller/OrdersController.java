@@ -148,14 +148,29 @@ public class OrdersController {
         return String.valueOf(orders.get(orders.size() - 1).getSerial_num());
     }
 
-    @RequestMapping("/finish-order.do")
+    @RequestMapping("/cus-finish-order.do")
     @ResponseBody
-    public void finishOrder(@RequestParam() Map<String, String> param){
+    public void cusFinishOrder(@RequestParam() Map<String, String> param){
         float rating = Float.parseFloat(param.get("rating"));
         String comment = param.get("comment");
         int serialNum = Integer.parseInt(param.get("serial_num"));
         String recMobileNum = param.get("rec_mobile_num");
         driverRepository.updateDriverRating(rating, recMobileNum);
         repository.finishOrder(comment, rating, serialNum);
+    }
+
+    @RequestMapping("/dvr-finish-order.do")
+    @ResponseBody
+    public void dvrFinishOrder(@RequestParam() Map<String, String> param){
+        float rating = Float.parseFloat(param.get("rating"));
+        String serial = param.get("call_serial");
+        customerRepository.updateRating(rating, serial);
+    }
+
+    @RequestMapping("/end-order.do")
+    @ResponseBody
+    public void endOrder(@RequestParam() Map<String, String> param){
+        int serialNum = Integer.parseInt(param.get("serial_num"));
+        repository.endOrder(serialNum);
     }
 }
