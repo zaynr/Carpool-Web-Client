@@ -1,11 +1,11 @@
 USE users;
 
 INSERT INTO Customers(user_name, serial_num, sex, mobile_number,pwd) VALUES(
-    "zengzengyu","19585","男","15658027823","123456"
+    "zengzengyu","19585","男","134567893","123456"
 );
 
 INSERT INTO Drivers(driver_name,mobile_number,pwd,car_plate,lat,lng) VALUES (
-    "driver-1","15656097278","123445","闽E-12345","31.191178","121.173026"
+    "driver-1","1987654328","123445","闽E-12345","31.191178","121.173026"
 );
 
 INSERT INTO Friends(userial1, userial2) VALUES (
