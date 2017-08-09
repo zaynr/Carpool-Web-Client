@@ -1,7 +1,7 @@
 USE users;
 
 INSERT INTO Customers(user_name, serial_num, sex, mobile_number,pwd) VALUES(
-    "zengzengyu","19585","男","15658027823","123456"
+    "zengzengyu","19585","男","134567893","123456"
 );
 
 INSERT INTO Drivers(driver_name,mobile_number,pwd,car_plate,lat,lng) VALUES (
